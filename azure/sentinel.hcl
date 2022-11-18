@@ -24,5 +24,5 @@ policy "restrict-outbound-destination-address-prefixes" {
 }
 policy "restrict-nsg-rules" {
     source = "./restrict-nsg-rules.sentinel"
-    enforcement_level = "advisory"
+    enforcement_level = "soft-mandatory"
 }
