@@ -26,3 +26,7 @@ policy "restrict-nsg-rules" {
     source = "./restrict-nsg-rules.sentinel"
     enforcement_level = "soft-mandatory"
 }
+policy "restrict-sqlserver-access-fwr"{
+source="./restrict-sqlserver-access-fwr.sentinel"
+enforcement_level="soft-mandatory"
+}
