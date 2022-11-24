@@ -1,52 +1,22 @@
-# This policy uses the Sentinel tfplan/v2 import to validate that sql server firewall rules
 
-import "tfplan/v2" as tfplan
 import "tfplan-functions" as plan
 
-# Forbidden CIDRs
-forbidden_cidrs = ["0.0.0.0"]
+# Allowed SQL Server IP addresses
+# Include "null" to allow missing or computed values
+allowed_IPs = ["10.0.17.62","10.10.10.10","10.10.10.13","2.2.2.2"]
 
-# Get all SQL Server Firewall Rules
-SqlRules = filter tfplan.resource_changes as address, rc {
-  rc.type is "azurerm_mssql_firewall_rule" and
-  rc.mode is "managed" and
-  (rc.change.actions contains "create" or rc.change.actions contains "update" or
-   rc.change.actions contains "read" or rc.change.actions contains "no-op")
-}
-# Filter Start IP Address
-violatingStartIp = plan.filter_attribute_in_list(
-    SqlRules, "start_ip_address", forbidden_cidrs, true)
+allFWRules = plan.find_resources("azurerm_mssql_firewall_rule")
 
-# Filter Start and End IP Address
-violatingEndIp = plan.filter_attribute_contains_items_from_list(
-    SqlRules, "end_ip_address", forbidden_cidrs, true)
-
-# Validate Firewall Rules
-violatingRules = 0
-for SqlRules as address, sg {
-
-  # Print violation messages
-  if length(violatingStartIp["messages"]) > 0 or
-     length(violatingEndIp["messages"]) > 0 {
-    violatingRules += 1
-    print("SQL Firewall Rule", address, "has at least one address",
-          "with forbidden Addresses")
-    if length(violatingStartIp["messages"]) > 0 {
-      plan.print_violations(violatingStartIp["messages"],
-           "Sql Firewall Rules")
-    }
-    if length(violatingEndIp["messages"]) > 0 {
-      plan.print_violations(violatingEndIp["messages"],
-          "Sql Firewall Rules")
-    }
-  }  
-} 
-
+# Warnings will be printed for all violations since the last parameter is true
+violatingStartIP = plan.filter_attribute_not_in_list(allFWRules,
+                    "start_ip_address", allowed_IPs, true)
+#End IP
+violatingEndIP = plan.filter_attribute_not_in_list(allFWRules,
+                    "end_ip_address", allowed_IPs, true)
 # Main rule
-validated = length(violatingStartIp["messages"]) is 0 and
-            length(violatingEndIp["messages"]) is 0 and
-            violatingRules is 0
+violations = length(violatingStartIP["messages"]) +
+             length(violatingEndIP["messages"])
 
 main = rule {
-  validated is true
+  violations is 0
 }
