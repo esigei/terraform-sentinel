@@ -24,6 +24,31 @@ variables = {
 		"name":  "client_secret",
 		"value": "REDACTED_SENSITIVE",
 	},
+	"firewallrules": {
+		"name": "firewallrules",
+		"value": [
+			{
+				"end_ip_address":   "10.5.5.5",
+				"name":             "rule1",
+				"start_ip_address": "10.5.5.5",
+			},
+			{
+				"end_ip_address":   "10.10.10.20",
+				"name":             "rule2",
+				"start_ip_address": "10.10.10.10",
+			},
+			{
+				"end_ip_address":   "10.10.10.10",
+				"name":             "rule6",
+				"start_ip_address": "10.2.2.5",
+			},
+			{
+				"end_ip_address":   "11.4.2.3",
+				"name":             "rule7",
+				"start_ip_address": "10.2.2.5",
+			},
+		],
+	},
 	"password": {
 		"name":  "password",
 		"value": "REDACTED_SENSITIVE",
@@ -39,17 +64,17 @@ variables = {
 }
 
 resource_changes = {
-	"azurerm_mssql_firewall_rule.example": {
-		"address": "azurerm_mssql_firewall_rule.example",
+	"azurerm_mssql_firewall_rule.msqlfwr[\"rule1\"]": {
+		"address": "azurerm_mssql_firewall_rule.msqlfwr[\"rule1\"]",
 		"change": {
 			"actions": [
 				"create",
 			],
 			"after": {
-				"end_ip_address":   "10.0.17.62",
-				"name":             "SQL-ServerFWR",
-				"server_id":        "",
-				"start_ip_address": "10.0.17.62",
+				"end_ip_address":   "10.5.5.5",
+				"name":             "rule1",
+				"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+				"start_ip_address": "10.5.5.5",
 				"timeouts":         null,
 			},
 			"after_unknown": {
@@ -58,10 +83,88 @@ resource_changes = {
 			"before": null,
 		},
 		"deposed":        "",
-		"index":          null,
+		"index":          "rule1",
 		"mode":           "managed",
 		"module_address": "",
-		"name":           "example",
+		"name":           "msqlfwr",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_mssql_firewall_rule",
+	},
+	"azurerm_mssql_firewall_rule.msqlfwr[\"rule2\"]": {
+		"address": "azurerm_mssql_firewall_rule.msqlfwr[\"rule2\"]",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"end_ip_address":   "10.10.10.20",
+				"name":             "rule2",
+				"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+				"start_ip_address": "10.10.10.10",
+				"timeouts":         null,
+			},
+			"after_unknown": {
+				"id": true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          "rule2",
+		"mode":           "managed",
+		"module_address": "",
+		"name":           "msqlfwr",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_mssql_firewall_rule",
+	},
+	"azurerm_mssql_firewall_rule.msqlfwr[\"rule6\"]": {
+		"address": "azurerm_mssql_firewall_rule.msqlfwr[\"rule6\"]",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"end_ip_address":   "10.10.10.10",
+				"name":             "rule6",
+				"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+				"start_ip_address": "10.2.2.5",
+				"timeouts":         null,
+			},
+			"after_unknown": {
+				"id": true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          "rule6",
+		"mode":           "managed",
+		"module_address": "",
+		"name":           "msqlfwr",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_mssql_firewall_rule",
+	},
+	"azurerm_mssql_firewall_rule.msqlfwr[\"rule7\"]": {
+		"address": "azurerm_mssql_firewall_rule.msqlfwr[\"rule7\"]",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"end_ip_address":   "11.4.2.3",
+				"name":             "rule7",
+				"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+				"start_ip_address": "10.2.2.5",
+				"timeouts":         null,
+			},
+			"after_unknown": {
+				"id": true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          "rule7",
+		"mode":           "managed",
+		"module_address": "",
+		"name":           "msqlfwr",
 		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
 		"type":           "azurerm_mssql_firewall_rule",
 	},
@@ -69,20 +172,51 @@ resource_changes = {
 		"address": "azurerm_sql_server.example",
 		"change": {
 			"actions": [
-				"delete",
+				"no-op",
 			],
-			"after":         null,
+			"after": {
+				"administrator_login":          "REDACTED_SENSITIVE",
+				"administrator_login_password": "REDACTED_SENSITIVE",
+				"connection_policy":            "Default",
+				"extended_auditing_policy":     [],
+				"fully_qualified_domain_name":  "elisqlservertest01.database.windows.net",
+				"id":                  "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+				"identity":            [],
+				"location":            "eastus",
+				"name":                "elisqlservertest01",
+				"resource_group_name": "myrg",
+				"tags": {
+					"environment": "production",
+				},
+				"threat_detection_policy": [
+					{
+						"disabled_alerts": [
+							"",
+						],
+						"email_account_admins": false,
+						"email_addresses": [
+							"",
+						],
+						"retention_days": 0,
+						"state":          "Enabled",
+						"storage_account_access_key": "REDACTED_SENSITIVE",
+						"storage_endpoint":           "",
+					},
+				],
+				"timeouts": null,
+				"version":  "12.0",
+			},
 			"after_unknown": {},
 			"before": {
 				"administrator_login":          "REDACTED_SENSITIVE",
 				"administrator_login_password": "REDACTED_SENSITIVE",
 				"connection_policy":            "Default",
 				"extended_auditing_policy":     [],
-				"fully_qualified_domain_name":  "",
+				"fully_qualified_domain_name":  "elisqlservertest01.database.windows.net",
 				"id":                  "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
 				"identity":            [],
 				"location":            "eastus",
-				"name":                "",
+				"name":                "elisqlservertest01",
 				"resource_group_name": "myrg",
 				"tags": {
 					"environment": "production",
@@ -155,29 +289,86 @@ raw = {
 		"root_module": {
 			"resources": [
 				{
-					"address": "azurerm_mssql_firewall_rule.example",
+					"address": "azurerm_mssql_firewall_rule.msqlfwr",
 					"expressions": {
 						"end_ip_address": {
-							"constant_value": "10.0.17.62",
+							"references": [
+								"each.value.end_ip_address",
+								"each.value",
+							],
 						},
 						"name": {
-							"constant_value": "SQL-ServerFWR",
+							"references": [
+								"each.value.name",
+								"each.value",
+							],
 						},
 						"server_id": {
 							"references": [
-								"data.azurerm_sql_server.mysqlsvr.id",
-								"data.azurerm_sql_server.mysqlsvr",
+								"azurerm_sql_server.example.id",
+								"azurerm_sql_server.example",
 							],
 						},
 						"start_ip_address": {
-							"constant_value": "10.0.17.62",
+							"references": [
+								"each.value.start_ip_address",
+								"each.value",
+							],
+						},
+					},
+					"for_each_expression": {
+						"references": [
+							"var.firewallrules",
+						],
+					},
+					"mode":                "managed",
+					"name":                "msqlfwr",
+					"provider_config_key": "azurerm",
+					"schema_version":      0,
+					"type":                "azurerm_mssql_firewall_rule",
+				},
+				{
+					"address": "azurerm_sql_server.example",
+					"expressions": {
+						"administrator_login": {
+							"references": [
+								"var.admin-login",
+							],
+						},
+						"administrator_login_password": {
+							"references": [
+								"var.password",
+							],
+						},
+						"location": {
+							"references": [
+								"data.azurerm_resource_group.myresources.location",
+								"data.azurerm_resource_group.myresources",
+							],
+						},
+						"name": {
+							"constant_value": "elisqlservertest01",
+						},
+						"resource_group_name": {
+							"references": [
+								"data.azurerm_resource_group.myresources.name",
+								"data.azurerm_resource_group.myresources",
+							],
+						},
+						"tags": {
+							"constant_value": {
+								"environment": "production",
+							},
+						},
+						"version": {
+							"constant_value": "12.0",
 						},
 					},
 					"mode":                "managed",
 					"name":                "example",
 					"provider_config_key": "azurerm",
 					"schema_version":      0,
-					"type":                "azurerm_mssql_firewall_rule",
+					"type":                "azurerm_sql_server",
 				},
 				{
 					"address": "data.azurerm_resource_group.myresources",
@@ -191,22 +382,6 @@ raw = {
 					"provider_config_key": "azurerm",
 					"schema_version":      0,
 					"type":                "azurerm_resource_group",
-				},
-				{
-					"address": "data.azurerm_sql_server.mysqlsvr",
-					"expressions": {
-						"name": {
-							"constant_value": "",
-						},
-						"resource_group_name": {
-							"constant_value": "myrg",
-						},
-					},
-					"mode":                "data",
-					"name":                "mysqlsvr",
-					"provider_config_key": "azurerm",
-					"schema_version":      0,
-					"type":                "azurerm_sql_server",
 				},
 			],
 			"variables": {
@@ -233,8 +408,32 @@ raw = {
 					"default":   "",
 					"sensitive": true,
 				},
+				"firewallrules": {
+					"default": [
+						{
+							"end_ip_address":   "10.5.5.5",
+							"name":             "rule1",
+							"start_ip_address": "10.5.5.5",
+						},
+						{
+							"end_ip_address":   "10.10.10.20",
+							"name":             "rule2",
+							"start_ip_address": "10.10.10.10",
+						},
+						{
+							"end_ip_address":   "10.10.10.10",
+							"name":             "rule6",
+							"start_ip_address": "10.2.2.5",
+						},
+						{
+							"end_ip_address":   "11.4.2.3",
+							"name":             "rule7",
+							"start_ip_address": "10.2.2.5",
+						},
+					],
+				},
 				"password": {
-					"default":   "",
+					"default":   "toor@2022",
 					"sensitive": true,
 				},
 				"subscription_id": {
@@ -242,7 +441,7 @@ raw = {
 					"sensitive": true,
 				},
 				"tenant_id": {
-					"default":   "",
+					"default":   "ec1fa55d-a038-497f-ac9d-3ddf288c4153",
 					"sensitive": true,
 				},
 			},
@@ -253,19 +452,128 @@ raw = {
 		"root_module": {
 			"resources": [
 				{
-					"address":          "azurerm_mssql_firewall_rule.example",
+					"address":          "azurerm_mssql_firewall_rule.msqlfwr[\"rule1\"]",
+					"index":            "rule1",
 					"mode":             "managed",
-					"name":             "example",
+					"name":             "msqlfwr",
 					"provider_name":    "registry.terraform.io/hashicorp/azurerm",
 					"schema_version":   0,
 					"sensitive_values": {},
 					"type":             "azurerm_mssql_firewall_rule",
 					"values": {
-						"end_ip_address":   "10.0.17.62",
-						"name":             "SQL-ServerFWR",
-						"server_id":        "",
-						"start_ip_address": "10.0.17.62",
+						"end_ip_address":   "10.5.5.5",
+						"name":             "rule1",
+						"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+						"start_ip_address": "10.5.5.5",
 						"timeouts":         null,
+					},
+				},
+				{
+					"address":          "azurerm_mssql_firewall_rule.msqlfwr[\"rule2\"]",
+					"index":            "rule2",
+					"mode":             "managed",
+					"name":             "msqlfwr",
+					"provider_name":    "registry.terraform.io/hashicorp/azurerm",
+					"schema_version":   0,
+					"sensitive_values": {},
+					"type":             "azurerm_mssql_firewall_rule",
+					"values": {
+						"end_ip_address":   "10.10.10.20",
+						"name":             "rule2",
+						"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+						"start_ip_address": "10.10.10.10",
+						"timeouts":         null,
+					},
+				},
+				{
+					"address":          "azurerm_mssql_firewall_rule.msqlfwr[\"rule6\"]",
+					"index":            "rule6",
+					"mode":             "managed",
+					"name":             "msqlfwr",
+					"provider_name":    "registry.terraform.io/hashicorp/azurerm",
+					"schema_version":   0,
+					"sensitive_values": {},
+					"type":             "azurerm_mssql_firewall_rule",
+					"values": {
+						"end_ip_address":   "10.10.10.10",
+						"name":             "rule6",
+						"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+						"start_ip_address": "10.2.2.5",
+						"timeouts":         null,
+					},
+				},
+				{
+					"address":          "azurerm_mssql_firewall_rule.msqlfwr[\"rule7\"]",
+					"index":            "rule7",
+					"mode":             "managed",
+					"name":             "msqlfwr",
+					"provider_name":    "registry.terraform.io/hashicorp/azurerm",
+					"schema_version":   0,
+					"sensitive_values": {},
+					"type":             "azurerm_mssql_firewall_rule",
+					"values": {
+						"end_ip_address":   "11.4.2.3",
+						"name":             "rule7",
+						"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+						"start_ip_address": "10.2.2.5",
+						"timeouts":         null,
+					},
+				},
+				{
+					"address":        "azurerm_sql_server.example",
+					"mode":           "managed",
+					"name":           "example",
+					"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+					"schema_version": 0,
+					"sensitive_values": {
+						"administrator_login":          true,
+						"administrator_login_password": true,
+						"extended_auditing_policy":     [],
+						"identity":                     [],
+						"tags":                         {},
+						"threat_detection_policy": [
+							{
+								"disabled_alerts": [
+									false,
+								],
+								"email_addresses": [
+									false,
+								],
+							},
+						],
+					},
+					"type": "azurerm_sql_server",
+					"values": {
+						"administrator_login":          "REDACTED_SENSITIVE",
+						"administrator_login_password": "REDACTED_SENSITIVE",
+						"connection_policy":            "Default",
+						"extended_auditing_policy":     [],
+						"fully_qualified_domain_name":  "elisqlservertest01.database.windows.net",
+						"id":                  "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+						"identity":            [],
+						"location":            "eastus",
+						"name":                "elisqlservertest01",
+						"resource_group_name": "myrg",
+						"tags": {
+							"environment": "production",
+						},
+						"threat_detection_policy": [
+							{
+								"disabled_alerts": [
+									"",
+								],
+								"email_account_admins": false,
+								"email_addresses": [
+									"",
+								],
+								"retention_days": 0,
+								"state":          "Enabled",
+								"storage_account_access_key": "REDACTED_SENSITIVE",
+								"storage_endpoint":           "",
+							},
+						],
+						"timeouts": null,
+						"version":  "12.0",
 					},
 				},
 			],
@@ -309,11 +617,11 @@ raw = {
 							"administrator_login_password": "REDACTED_SENSITIVE",
 							"connection_policy":            "Default",
 							"extended_auditing_policy":     [],
-							"fully_qualified_domain_name":  "",
+							"fully_qualified_domain_name":  "elisqlservertest01.database.windows.net",
 							"id":                  "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
 							"identity":            [],
 							"location":            "eastus",
-							"name":                "",
+							"name":                "elisqlservertest01",
 							"resource_group_name": "myrg",
 							"tags": {
 								"environment": "production",
@@ -355,32 +663,6 @@ raw = {
 							"timeouts": null,
 						},
 					},
-					{
-						"address":        "data.azurerm_sql_server.mysqlsvr",
-						"mode":           "data",
-						"name":           "mysqlsvr",
-						"provider_name":  "registry.terraform.io/hashicorp/azurerm",
-						"schema_version": 0,
-						"sensitive_values": {
-							"identity": [],
-							"tags":     {},
-						},
-						"type": "azurerm_sql_server",
-						"values": {
-							"administrator_login": "",
-							"fqdn":                "",
-							"id":                  "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
-							"identity":            [],
-							"location":            "eastus",
-							"name":                "",
-							"resource_group_name": "myrg",
-							"tags": {
-								"environment": "production",
-							},
-							"timeouts": null,
-							"version":  "12.0",
-						},
-					},
 				],
 			},
 		},
@@ -390,21 +672,21 @@ raw = {
 			"attribute": [
 				"id",
 			],
-			"resource": "data.azurerm_sql_server.mysqlsvr",
+			"resource": "azurerm_sql_server.example",
 		},
 	],
 	"resource_changes": [
 		{
-			"address": "azurerm_mssql_firewall_rule.example",
+			"address": "azurerm_mssql_firewall_rule.msqlfwr[\"rule1\"]",
 			"change": {
 				"actions": [
 					"create",
 				],
 				"after": {
-					"end_ip_address":   "10.0.17.62",
-					"name":             "SQL-ServerFWR",
-					"server_id":        "",
-					"start_ip_address": "10.0.17.62",
+					"end_ip_address":   "10.5.5.5",
+					"name":             "rule1",
+					"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+					"start_ip_address": "10.5.5.5",
 					"timeouts":         null,
 				},
 				"after_sensitive": {},
@@ -414,8 +696,87 @@ raw = {
 				"before":           null,
 				"before_sensitive": false,
 			},
+			"index":         "rule1",
 			"mode":          "managed",
-			"name":          "example",
+			"name":          "msqlfwr",
+			"provider_name": "registry.terraform.io/hashicorp/azurerm",
+			"type":          "azurerm_mssql_firewall_rule",
+		},
+		{
+			"address": "azurerm_mssql_firewall_rule.msqlfwr[\"rule2\"]",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"end_ip_address":   "10.10.10.20",
+					"name":             "rule2",
+					"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+					"start_ip_address": "10.10.10.10",
+					"timeouts":         null,
+				},
+				"after_sensitive": {},
+				"after_unknown": {
+					"id": true,
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"index":         "rule2",
+			"mode":          "managed",
+			"name":          "msqlfwr",
+			"provider_name": "registry.terraform.io/hashicorp/azurerm",
+			"type":          "azurerm_mssql_firewall_rule",
+		},
+		{
+			"address": "azurerm_mssql_firewall_rule.msqlfwr[\"rule6\"]",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"end_ip_address":   "10.10.10.10",
+					"name":             "rule6",
+					"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+					"start_ip_address": "10.2.2.5",
+					"timeouts":         null,
+				},
+				"after_sensitive": {},
+				"after_unknown": {
+					"id": true,
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"index":         "rule6",
+			"mode":          "managed",
+			"name":          "msqlfwr",
+			"provider_name": "registry.terraform.io/hashicorp/azurerm",
+			"type":          "azurerm_mssql_firewall_rule",
+		},
+		{
+			"address": "azurerm_mssql_firewall_rule.msqlfwr[\"rule7\"]",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"end_ip_address":   "11.4.2.3",
+					"name":             "rule7",
+					"server_id":        "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+					"start_ip_address": "10.2.2.5",
+					"timeouts":         null,
+				},
+				"after_sensitive": {},
+				"after_unknown": {
+					"id": true,
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"index":         "rule7",
+			"mode":          "managed",
+			"name":          "msqlfwr",
 			"provider_name": "registry.terraform.io/hashicorp/azurerm",
 			"type":          "azurerm_mssql_firewall_rule",
 		},
@@ -423,20 +784,69 @@ raw = {
 			"address": "azurerm_sql_server.example",
 			"change": {
 				"actions": [
-					"delete",
+					"no-op",
 				],
-				"after_sensitive": false,
-				"after_unknown":   {},
+				"after": {
+					"administrator_login":          "REDACTED_SENSITIVE",
+					"administrator_login_password": "REDACTED_SENSITIVE",
+					"connection_policy":            "Default",
+					"extended_auditing_policy":     [],
+					"fully_qualified_domain_name":  "elisqlservertest01.database.windows.net",
+					"id":                  "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
+					"identity":            [],
+					"location":            "eastus",
+					"name":                "elisqlservertest01",
+					"resource_group_name": "myrg",
+					"tags": {
+						"environment": "production",
+					},
+					"threat_detection_policy": [
+						{
+							"disabled_alerts": [
+								"",
+							],
+							"email_account_admins": false,
+							"email_addresses": [
+								"",
+							],
+							"retention_days": 0,
+							"state":          "Enabled",
+							"storage_account_access_key": "REDACTED_SENSITIVE",
+							"storage_endpoint":           "",
+						},
+					],
+					"timeouts": null,
+					"version":  "12.0",
+				},
+				"after_sensitive": {
+					"administrator_login":          true,
+					"administrator_login_password": true,
+					"extended_auditing_policy":     [],
+					"identity":                     [],
+					"tags":                         {},
+					"threat_detection_policy": [
+						{
+							"disabled_alerts": [
+								false,
+							],
+							"email_addresses": [
+								false,
+							],
+							"storage_account_access_key": true,
+						},
+					],
+				},
+				"after_unknown": {},
 				"before": {
 					"administrator_login":          "REDACTED_SENSITIVE",
 					"administrator_login_password": "REDACTED_SENSITIVE",
 					"connection_policy":            "Default",
 					"extended_auditing_policy":     [],
-					"fully_qualified_domain_name":  "",
+					"fully_qualified_domain_name":  "elisqlservertest01.database.windows.net",
 					"id":                  "/subscriptions/a2d024b9-7946-4d85-b1e8-c208710a0dcb/resourceGroups/myrg/providers/Microsoft.Sql/servers/elisqlservertest01",
 					"identity":            [],
 					"location":            "eastus",
-					"name":                "",
+					"name":                "elisqlservertest01",
 					"resource_group_name": "myrg",
 					"tags": {
 						"environment": "production",
@@ -505,6 +915,30 @@ raw = {
 		},
 		"client_secret": {
 			"value": "REDACTED_SENSITIVE",
+		},
+		"firewallrules": {
+			"value": [
+				{
+					"end_ip_address":   "10.5.5.5",
+					"name":             "rule1",
+					"start_ip_address": "10.5.5.5",
+				},
+				{
+					"end_ip_address":   "10.10.10.20",
+					"name":             "rule2",
+					"start_ip_address": "10.10.10.10",
+				},
+				{
+					"end_ip_address":   "10.10.10.10",
+					"name":             "rule6",
+					"start_ip_address": "10.2.2.5",
+				},
+				{
+					"end_ip_address":   "11.4.2.3",
+					"name":             "rule7",
+					"start_ip_address": "10.2.2.5",
+				},
+			],
 		},
 		"password": {
 			"value": "REDACTED_SENSITIVE",
