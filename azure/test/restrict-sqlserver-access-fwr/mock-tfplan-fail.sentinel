@@ -169,8 +169,8 @@ resource_changes = {
 		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
 		"type":           "azurerm_mssql_firewall_rule",
 	},
-	"azurerm_sql_server.example": {
-		"address": "azurerm_sql_server.example",
+	"azurerm_mssql_server.example": {
+		"address": "azurerm_mssql_server.example",
 		"change": {
 			"actions": [
 				"no-op",
@@ -247,7 +247,7 @@ resource_changes = {
 		"module_address": "",
 		"name":           "example",
 		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
-		"type":           "azurerm_sql_server",
+		"type":           "azurerm_mssql_server",
 	},
 }
 
@@ -306,8 +306,8 @@ raw = {
 						},
 						"server_id": {
 							"references": [
-								"azurerm_sql_server.example.id",
-								"azurerm_sql_server.example",
+								"azurerm_mssql_server.example.id",
+								"azurerm_mssql_server.example",
 							],
 						},
 						"start_ip_address": {
@@ -329,7 +329,7 @@ raw = {
 					"type":                "azurerm_mssql_firewall_rule",
 				},
 				{
-					"address": "azurerm_sql_server.example",
+					"address": "azurerm_mssql_server.example",
 					"expressions": {
 						"administrator_login": {
 							"references": [
@@ -369,7 +369,7 @@ raw = {
 					"name":                "example",
 					"provider_config_key": "azurerm",
 					"schema_version":      0,
-					"type":                "azurerm_sql_server",
+					"type":                "azurerm_mssql_server",
 				},
 				{
 					"address": "data.azurerm_resource_group.myresources",
@@ -521,7 +521,7 @@ raw = {
 					},
 				},
 				{
-					"address":        "azurerm_sql_server.example",
+					"address":        "azurerm_mssql_server.example",
 					"mode":           "managed",
 					"name":           "example",
 					"provider_name":  "registry.terraform.io/hashicorp/azurerm",
@@ -543,7 +543,7 @@ raw = {
 							},
 						],
 					},
-					"type": "azurerm_sql_server",
+					"type": "azurerm_mssql_server",
 					"values": {
 						"administrator_login":          "REDACTED_SENSITIVE",
 						"administrator_login_password": "REDACTED_SENSITIVE",
@@ -587,7 +587,7 @@ raw = {
 			"root_module": {
 				"resources": [
 					{
-						"address": "azurerm_sql_server.example",
+						"address": "azurerm_mssql_server.example",
 						"depends_on": [
 							"data.azurerm_resource_group.myresources",
 						],
@@ -612,7 +612,7 @@ raw = {
 								},
 							],
 						},
-						"type": "azurerm_sql_server",
+						"type": "azurerm_mssql_server",
 						"values": {
 							"administrator_login":          "REDACTED_SENSITIVE",
 							"administrator_login_password": "REDACTED_SENSITIVE",
@@ -673,7 +673,7 @@ raw = {
 			"attribute": [
 				"id",
 			],
-			"resource": "azurerm_sql_server.example",
+			"resource": "azurerm_mssql_server.example",
 		},
 	],
 	"resource_changes": [
@@ -782,7 +782,7 @@ raw = {
 			"type":          "azurerm_mssql_firewall_rule",
 		},
 		{
-			"address": "azurerm_sql_server.example",
+			"address": "azurerm_mssql_server.example",
 			"change": {
 				"actions": [
 					"no-op",
@@ -892,7 +892,7 @@ raw = {
 			"mode":          "managed",
 			"name":          "example",
 			"provider_name": "registry.terraform.io/hashicorp/azurerm",
-			"type":          "azurerm_sql_server",
+			"type":          "azurerm_mssql_server",
 		},
 	],
 	"terraform_version": "1.3.4",
