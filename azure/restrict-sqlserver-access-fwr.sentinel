@@ -24,10 +24,8 @@ for SQLInstances as _,r {
 			print(mssqlServerName,"firewall Rule:",ruleName,"Has Start IP address:",startIP ," that needs INFOSEC Approval")
 		}else if (allowedIPAddresses not contains endIP) {
 			validated = false
-			print(mssqlServerName,"firewall Rule:",ruleName,"Has Start IP address:",startIP ," that needs INFOSEC Approval")
-		}else{
-		validated= true
-	}
+			print(mssqlServerName,"firewall Rule:",ruleName,"Has end-IP address:",endIP ," that needs INFOSEC Approval")
+		}
 }
 }
 }
