@@ -4,10 +4,6 @@ module "tfplan-functions" {
 module "common"{
 source= "../common-functions/common/common.sentinel"
 }
-module "tfstate-functions" {
-    source = "../common-functions/tfstate-functions/tfstate-functions.sentinel"
-}
-
 module "tfconfig-functions" {
     source = "../common-functions/tfconfig-functions/tfconfig-functions.sentinel"
 }
