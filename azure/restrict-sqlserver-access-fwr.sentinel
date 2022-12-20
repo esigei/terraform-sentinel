@@ -1,0 +1,36 @@
+# This policy uses the Sentinel tfplan/v2 import to validate that sql server firewall rules
+import "tfplan/v2" as tfplan
+import "tfplan-functions" as plan
+import "common"
+
+# Allowed ip addressess
+allowedIPAddresses = ["0.0.0.0","10.0.17.62","10.10.10.10","10.10.10.20","2.2.2.2","1.1.1.1","3.3.3.3","4.4.4.4","10.5.5.5","10.8.8.8","10.2.2.5","11.4.2.3"]
+validated = true
+SQLInstances=plan.find_resources("azurerm_mssql_server")
+SQLFwRules= plan.find_resources("azurerm_mssql_firewall_rule")
+for SQLInstances as _,r {
+	resourceGroupName = plan.evaluate_attribute(r,"resource_group_name")
+	mssqlServerName = plan.evaluate_attribute(r,"name") 
+	environment = resourceGroupName[2:4]
+	if (length(SQLFwRules) < 1) {
+		validated = false
+		print (msslServerName, "Has Invalid Firewall Rules Configurations")
+	} else {
+	for SQLFwRules as _,fr {
+		ruleName = plan.evaluate_attribute(fr, "name")
+		startIP = plan.evaluate_attribute(fr, "start_ip_address")
+		endIP = plan.evaluate_attribute(fr, "end_ip_address")
+		# Test to check if Start IP is in the allowed list
+		 if (common.is_prod_env(environment) and allowedIPAddresses not contains startIP) {
+			validated=false
+			print(mssqlServerName,"firewall Rule:",ruleName,"Has Start IP address:",startIP ," that needs INFOSEC Approval")
+		}else if (common.is_prod_env(environment) and allowedIPAddresses not contains endIP) {
+			validated = false
+			print(mssqlServerName,"firewall Rule:",ruleName,"Has end-IP address:",endIP ," that needs INFOSEC Approval")
+		}
+}
+}
+}
+main = rule {
+  validated 
+}
